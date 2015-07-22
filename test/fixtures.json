@@ -1,0 +1,99 @@
+{
+  "token": "qrXhdpvsEuv2r93KzJJR0FucUWZdpSdHpXHGG8TCkjxhxK7N",
+  "appId": "e4fd3974-20fe-11e5-89c5-080725007e28",
+  "appIdFull": "layer:///apps/staging/e4fd3974-20fe-11e5-89c5-080725007e28",
+  "conversations": {
+    "uuid": "f3cc7b32-3c92-11e4-baad-164230d1df67",
+    "success": {
+      "id": "layer:///conversations/f3cc7b32-3c92-11e4-baad-164230d1df67",
+      "url": "https://api.layer.com/apps/24f43c32-4d95-11e4-b3a2-0fd00000020d/conversations/f3cc7b32-3c92-11e4-baad-164230d1df67",
+      "created_at": "2014-09-15T04:44:47+00:00",
+      "participants": [
+        "12345",
+        "abcd"
+      ],
+      "distinct": false,
+      "metadata": {
+        "info": {
+          "background_color": "#3c3c3c",
+          "title": "A conversation about Coffee"
+        }
+      }
+    },
+    "error": {
+      "missing": {
+        "id": "missing_property",
+        "code": 104,
+        "data": {
+          "property": "participants"
+        }
+      },
+      "notfound": {
+        "id": "not_found",
+        "code": 102,
+        "message": "The referenced conversation cannot be found."
+      }
+    }
+  },
+  "messages": {
+    "success": {
+      "id": "layer:///messages/940de862-3c96-11e4-baad-164230d1df67",
+      "url": "https://api.layer.com/apps/24f43c32-4d95-11e4-b3a2-0fd00000020d/messages/940de862-3c96-11e4-baad-164230d1df67",
+      "conversation": {
+        "id": "layer:///conversations/f3cc7b32-3c92-11e4-baad-164230d1df67",
+        "url": "https://api.layer.com/apps/24f43c32-4d95-11e4-b3a2-0fd00000020d/conversations/f3cc7b32-3c92-11e4-baad-164230d1df67"
+      },
+      "parts": [
+        {
+          "body": "Hello, World!",
+          "mime_type": "text/plain"
+        },
+        {
+          "body": "YW55IGNhcm5hbCBwbGVhc3VyZQ==",
+          "mime_type": "image/jpeg",
+          "encoding": "base64"
+        }
+      ],
+      "sent_at": "2014-09-09T04:44:47+00:00",
+      "sender": {
+        "name": "t-bone",
+        "user_id": null
+      },
+      "recipient_status": {
+        "777": "sent",
+        "999": "sent",
+        "111": "sent"
+      }
+    }
+  },
+  "announcements": {
+    "success": {
+      "id": "layer:///announcements/f3cc7b32-3c92-11e4-baad-164230d1df67",
+      "url": "https://api.layer.com/apps/24f43c32-4d95-11e4-b3a2-0fd00000020d/announcements/f3cc7b32-3c92-11e4-baad-164230d1df67",
+      "sent_at": "2014-09-15T04:44:47+00:00",
+      "recipients": [ "1234", "5678" ],
+      "sender": {
+        "name": "The System",
+        "user_id": null
+      },
+      "parts": [
+        {
+          "body": "Hello, World!",
+          "mime_type": "text/plain"
+        },
+        {
+          "body": "YW55IGNhcm5hbCBwbGVhc3VyZQ==",
+          "mime_type": "image/jpeg",
+          "encoding": "base64"
+        }
+      ]
+    }
+  },
+  "uuid": {
+    "normal": "e4fd3974-20fe-11e5-89c5-080725007e28",
+    "prefixed": "layer:///apps/staging/e4fd3974-20fe-11e5-89c5-080725007e28",
+    "invalid1": "sgfaljshdfkluasfkua",
+    "invalid2": 123,
+    "invalid3": null
+  }
+}

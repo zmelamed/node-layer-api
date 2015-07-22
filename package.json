@@ -1,0 +1,22 @@
+{
+  "name": "layer-api",
+  "version": "0.1.0",
+  "description": "Node.js library, which provides a wrapper for the Layer Platform API",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "node_modules/mocha/bin/mocha test/"
+  },
+  "keywords": [
+    "Layer",
+    "API",
+    "SDK",
+    "Platform"
+  ],
+  "author": "Nil Gradisnik <nil@layer.com>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "should": "~7.0.1",
+    "mocha": "~2.2.5",
+    "nock": "~2.7.0"
+  }
+}

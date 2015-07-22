@@ -1,0 +1,95 @@
+/*globals describe it*/
+'use strict';
+
+var should = require('should');
+
+var LayerAPI = require('../../lib');
+var layerAPI = new LayerAPI({token: process.env.LAYER_TOKEN, appId: process.env.LAYER_APP_ID});
+
+describe('Conversation operations', function() {
+
+  var participants = ['test123', 'blabla'],
+      conversationId = null;
+
+  describe('Creating a conversation with participants', function() {
+    it('should return a conversation object', function(done) {
+      layerAPI.conversations.create({participants: participants}, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.status.should.be.eql(201);
+        res.body.participants.should.match(participants);
+
+        conversationId = res.body.id;
+        done(err);
+      });
+    });
+  });
+
+  describe('Creating a conversation with empty body', function() {
+    it('should return an error', function(done) {
+      layerAPI.conversations.create({}, function(err, res) {
+        should.exist(err);
+        should.not.exist(res);
+
+        err.status.should.be.eql(422);
+        err.body.should.have.properties({
+          id: 'missing_property',
+          code: 104,
+          data: { property: 'participants' }
+        });
+
+        done();
+      });
+    });
+  });
+
+  describe('Retrieving a conversation by conversation ID', function() {
+    it('should return a conversation object', function(done) {
+      layerAPI.conversations.get(conversationId, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.status.should.be.eql(200);
+        res.body.participants.should.match(participants);
+
+        done(err);
+      });
+    });
+  });
+
+  describe('Retrieving a conversation by non-existent conversation ID', function() {
+    it('should return 404', function(done) {
+      layerAPI.conversations.get('24f43c32-4d95-11e4-b3a2-0fd00000020d', function(err, res) {
+        should.exist(err);
+        should.not.exist(res);
+
+        err.status.should.be.eql(404);
+        err.body.should.have.properties({
+          id: 'not_found',
+          code: 102
+        });
+
+        done();
+      });
+    });
+  });
+
+  describe('Editing a conversation by conversation ID', function() {
+    var operations = [
+      {operation: 'add', property: 'participants', value: 'user1'},
+      {operation: 'remove', property: 'participants', value: 'user1'},
+      {operation: 'set', property: 'participants', value: ['user1', 'user2', 'user3']}
+    ];
+
+    it('should return a 204', function(done) {
+      layerAPI.conversations.edit(conversationId, operations, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+        should(res.body).be.eql(null);
+
+        done(err);
+      });
+    });
+  });
+});
