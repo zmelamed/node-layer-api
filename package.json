@@ -1,6 +1,6 @@
 {
   "name": "layer-api",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Node.js library, which provides a wrapper for the Layer Platform API",
   "main": "lib/index.js",
   "scripts": {

@@ -30,7 +30,7 @@ layerAPI.conversations.create({participants: ['abcd']}, function(err, res) {
   var cid = res.body.id;
 
   // Send a Message
-  layerAPI.messages.sendTexFromUser(cid, 'abcd', 'Hello, World!' function(err, res) {
+  layerAPI.messages.sendTexFromUser(cid, 'abcd', 'Hello, World!', function(err, res) {
     console.log(err || res.body);
   });
 });
