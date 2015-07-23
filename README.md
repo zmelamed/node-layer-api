@@ -39,15 +39,20 @@ layerAPI.conversations.create({participants: ['abcd']}, function(err, res) {
 
 ## Initialization
 
-To use this library you need to create a new instance of the `layer-api` module by passing `options` object to a constructor.
+To use this library you need to create a new instance of the `layer-api` module by passing `config` object to a constructor.
 
-### new LayerAPI(options)
+### new LayerAPI(config)
 
-Layer API constructor is initialized with the following options:
+Layer API constructor is initialized with the following configuration values:
 
  - `token` - Layer Platform API token which can be obtained from [Developer Dashboard](https://developer.layer.com/projects/keys)
  - `appId` - Layer application ID
- - `debug` - *Optional* Enable debugging
+
+*Optional values:*
+
+ - `version` - API version to use (default: `1.0`)
+ - `timeout` - Request timeout in milliseconds (default: `10000` milliseconds)
+ - `debug` - Enable debugging (default: `false`)
 
 ## Conversations
 

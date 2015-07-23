@@ -12,14 +12,14 @@ var RESOURCES = ['conversations', 'messages', 'announcements'];
 
 describe('Layer API constructor', function() {
 
-  describe('Passing options with full appId', function() {
+  describe('Passing config with full appId', function() {
     it('should throw an error', function() {
       var layerApi = new LayerAPI({token: fixtures.token, appId: fixtures.appIdFull});
       should.exist(layerApi);
     });
   });
 
-  describe('Passing options with token and appId', function() {
+  describe('Passing config with token and appId', function() {
     it('should expose API operations', function() {
       var layerApi = new LayerAPI({token: fixtures.token, appId: fixtures.appId});
 
@@ -39,7 +39,7 @@ describe('Layer API constructor', function() {
     });
   });
 
-  describe('Passing no options', function() {
+  describe('Passing no config', function() {
     it('should throw an error', function() {
       try {
         new LayerAPI();
@@ -51,7 +51,7 @@ describe('Layer API constructor', function() {
     });
   });
 
-  describe('Passing options with token only', function() {
+  describe('Passing config with token only', function() {
     it('should throw an error', function() {
       try {
         new LayerAPI({token: fixtures.token});
@@ -63,7 +63,7 @@ describe('Layer API constructor', function() {
     });
   });
 
-  describe('Passing options with invalid appId', function() {
+  describe('Passing config with invalid appId', function() {
     it('should throw an error', function() {
       try {
         new LayerAPI({token: fixtures.token, appId: '12345'});
