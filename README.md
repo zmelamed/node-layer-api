@@ -153,7 +153,7 @@ var payload = {
     }
   ]
 };
-layerAPI.messages.sendTexFromUser(cid, payload, function(err, res) {
+layerAPI.messages.send(cid, payload, function(err, res) {
   if (err) return console.error(err);
 
   // message ID
