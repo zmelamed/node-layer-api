@@ -16,10 +16,12 @@ describe('Layer API constructor', function() {
       should.exist(layerApi);
 
       should(typeof layerApi.conversations.create).be.eql('function');
+      should(typeof layerApi.conversations.createDedupe).be.eql('function');
       should(typeof layerApi.conversations.get).be.eql('function');
       should(typeof layerApi.conversations.edit).be.eql('function');
 
       should(typeof layerApi.messages.send).be.eql('function');
+      should(typeof layerApi.messages.sendDedupe).be.eql('function');
       should(typeof layerApi.messages.sendTexFromUser).be.eql('function');
       should(typeof layerApi.messages.sendTexFromUser).be.eql('function');
 

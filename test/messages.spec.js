@@ -15,6 +15,7 @@ describe('Messages operations', function() {
   describe('Sending a message to a conversation', function() {
     nock('https://api.layer.com')
       .post('/apps/' + fixtures.appId + '/conversations/' + fixtures.conversations.uuid + '/messages')
+      .times(3)
       .reply(201, fixtures.messages.success);
 
     it('should return a message object', function(done) {
@@ -30,6 +31,37 @@ describe('Messages operations', function() {
         res.body.should.have.properties(fixtures.messages.success);
 
         done(err);
+      });
+    });
+
+    it('with dedupe should return a message object', function(done) {
+      var body = {
+        sender: fixtures.messages.success.sender,
+        parts: fixtures.messages.success.parts
+      };
+      layerAPI.messages.sendDedupe(fixtures.conversations.uuid, fixtures.conversations.uuid, body, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.status.should.be.eql(201);
+        res.body.should.have.properties(fixtures.messages.success);
+
+        done(err);
+      });
+    });
+
+    it('with invalid dedupe should return an error', function(done) {
+      var body = {
+        sender: fixtures.messages.success.sender,
+        parts: fixtures.messages.success.parts
+      };
+      layerAPI.messages.sendDedupe(123, fixtures.conversations.uuid, body, function(err, res) {
+        should.exist(err);
+        should.not.exist(res);
+
+        err.message.should.be.eql(utils.i18n.dedupe);
+
+        done();
       });
     });
   });

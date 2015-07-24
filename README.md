@@ -21,17 +21,17 @@ You can find full documentation on Platform API at [developer.layer.com/docs/pla
 var LayerAPI = require('layer-api');
 
 // Initialize by providing your Layer credentials
-var layerAPI = new LayerAPI({
+var layer = new LayerAPI({
   token: API_TOKEN,
   appId: APP_ID
 });
 
 // Create a Conversation
-layerAPI.conversations.create({participants: ['abcd']}, function(err, res) {
+layer.conversations.create({participants: ['abcd']}, function(err, res) {
   var cid = res.body.id;
 
   // Send a Message
-  layerAPI.messages.sendTexFromUser(cid, 'abcd', 'Hello, World!', function(err, res) {
+  layer.messages.sendTexFromUser(cid, 'abcd', 'Hello, World!', function(err, res) {
     console.log(err || res.body);
   });
 });
@@ -70,13 +70,17 @@ Conversations coordinate messaging within Layer and can contain up to 25 partici
 ##### Examples
 
 ```javascript
-layerAPI.conversations.create({participants: ['abcd']}, function(err, res) {
+layer.conversations.create({participants: ['abcd']}, function(err, res) {
   if (err) return console.error(err);
 
   // conversation ID
   var cid = res.body.id;
 });
 ```
+
+### conversations.createDedupe(uuid, payload, [callback])
+
+Same as create conversation above but including [de-duplicating](https://developer.layer.com/docs/platform#de-duplicating-requests) UUID value.
 
 ---------------------------------------
 
@@ -92,7 +96,7 @@ layerAPI.conversations.create({participants: ['abcd']}, function(err, res) {
 ##### Examples
 
 ```javascript
-layerAPI.conversations.get(cid, function(err, res) {
+layer.conversations.get(cid, function(err, res) {
   if (err) return console.error(err);
 
   // conversation data
@@ -118,7 +122,7 @@ layerAPI.conversations.get(cid, function(err, res) {
 var operations = [
   {"operation": "add", "property": "participants", "value": "user1"}
 ];
-layerAPI.conversations.edit(cid, operations, function(err, res) {
+layer.conversations.edit(cid, operations, function(err, res) {
   if (err) return console.error(err);
 
   // conversation data
@@ -158,13 +162,21 @@ var payload = {
     }
   ]
 };
-layerAPI.messages.send(cid, payload, function(err, res) {
+layer.messages.send(cid, payload, function(err, res) {
   if (err) return console.error(err);
 
   // message ID
   var messageId = res.body.id;
 });
 ```
+
+---------------------------------------
+
+### messages.sendDedupe(uuid, cid, payload, [callback])
+
+Same as send a message above but including [de-duplicating](https://developer.layer.com/docs/platform#de-duplicating-requests) UUID value.
+
+---------------------------------------
 
 ### messages.sendTexFromUser(cid, userId, text, [callback])
 
@@ -176,6 +188,8 @@ Shorthand method for sending a plain text Message by providing `userId` and `tex
  - `userId` - User ID of the participant that this message will appear to be from
  - `text` - Text or base64 encoded data for your message
  - `callback(err, res)` - *Optional* Callback function returns an error and response objects
+
+---------------------------------------
 
 ### messages.sendTexFromName(cid, name, text, [callback])
 
@@ -218,13 +232,19 @@ var payload = {
     }
   ]
 };
-layerAPI.announcements.send(payload, function(err, res) {
+layer.announcements.send(payload, function(err, res) {
   if (err) return console.error(err);
 
   // announcement data
   var announcement = res.body;
 });
 ```
+
+---------------------------------------
+
+### announcements.sendDedupe(uuid, payload, [callback])
+
+Same as send an announcement above but including [de-duplicating](https://developer.layer.com/docs/platform#de-duplicating-requests) UUID value.
 
 ## Testing
 

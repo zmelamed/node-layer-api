@@ -15,6 +15,7 @@ describe('Announcements operations', function() {
   describe('Sending an announcement', function() {
     nock('https://api.layer.com')
       .post('/apps/' + fixtures.appId + '/announcements')
+      .times(3)
       .reply(202, fixtures.announcements.success);
 
     it('should return a message object', function(done) {
@@ -31,6 +32,39 @@ describe('Announcements operations', function() {
         res.body.should.have.properties(fixtures.announcements.success);
 
         done(err);
+      });
+    });
+
+    it('with dedupe should return a message object', function(done) {
+      var body = {
+        recipients: fixtures.announcements.success.recipients,
+        sender: fixtures.announcements.success.sender,
+        parts: fixtures.announcements.success.parts
+      };
+      layerAPI.announcements.sendDedupe(fixtures.appId, body, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.status.should.be.eql(202);
+        res.body.should.have.properties(fixtures.announcements.success);
+
+        done(err);
+      });
+    });
+
+    it('with invalid dedupe should return a message object', function(done) {
+      var body = {
+        recipients: fixtures.announcements.success.recipients,
+        sender: fixtures.announcements.success.sender,
+        parts: fixtures.announcements.success.parts
+      };
+      layerAPI.announcements.sendDedupe(undefined, body, function(err, res) {
+        should.exist(err);
+        should.not.exist(res);
+
+        err.message.should.be.eql(utils.i18n.dedupe);
+
+        done();
       });
     });
   });

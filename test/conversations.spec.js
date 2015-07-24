@@ -15,10 +15,12 @@ describe('Conversation operations', function() {
   describe('Creating a conversation with participants', function() {
     nock('https://api.layer.com')
       .post('/apps/' + fixtures.appId + '/conversations')
+      .times(2)
       .reply(201, fixtures.conversations.success);
 
     it('should return a conversation object', function(done) {
-      layerAPI.conversations.create({participants: fixtures.conversations.success.participants}, function(err, res) {
+      var payload = {participants: fixtures.conversations.success.participants};
+      layerAPI.conversations.create(payload, function(err, res) {
         should.not.exist(err);
         should.exist(res);
 
@@ -26,6 +28,31 @@ describe('Conversation operations', function() {
         res.body.should.have.properties(fixtures.conversations.success);
 
         done(err);
+      });
+    });
+
+    it('with dedupe should return a conversation object', function(done) {
+      var payload = {participants: fixtures.conversations.success.participants};
+      layerAPI.conversations.createDedupe(fixtures.appId, payload, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.status.should.be.eql(201);
+        res.body.should.have.properties(fixtures.conversations.success);
+
+        done(err);
+      });
+    });
+
+    it('with invalid dedupe value should return an error', function(done) {
+      var payload = {participants: fixtures.conversations.success.participants};
+      layerAPI.conversations.createDedupe('nonuuidvalue', payload, function(err, res) {
+        should.exist(err);
+        should.not.exist(res);
+
+        err.message.should.be.eql(utils.i18n.dedupe);
+
+        done();
       });
     });
   });
