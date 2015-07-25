@@ -253,7 +253,7 @@ Layer Platform API allows you to manage a [block list](https://developer.layer.c
   - `ownerId` The owner of the block list
   - `userId` A user that is being blocked from communicating with the `ownerId`
 
-### blocklist.get(ownerId, [callback])
+### blocklist.get(ownerId, callback)
 
 Retrieve an array of all blocked users for the specified owner.
 
@@ -320,7 +320,7 @@ layer.blocklist.unblock(ownerId, userId, function(err, res) {
 
 ## Testing
 
-The unit tests are based on the [mocha](http://visionmedia.github.com/mocha/) module, which may be installed via npm. To run the tests make sure that the npm dependencies are installed by running `npm install` from the project directory.
+The unit tests are based on the [mocha](https://github.com/mochajs/mocha) module, which may be installed via npm. To run the tests make sure that the npm dependencies are installed by running `npm install` from the project directory.
 
     npm test
 
