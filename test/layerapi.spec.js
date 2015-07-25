@@ -11,7 +11,7 @@ var LayerAPI = require('../lib');
 describe('Layer API constructor', function() {
 
   describe('Passing config with token and appId', function() {
-    it('should expose API operations', function() {
+    it('should expose expected methods', function() {
       var layerApi = new LayerAPI({token: fixtures.token, appId: fixtures.appId});
       should.exist(layerApi);
 
@@ -26,6 +26,11 @@ describe('Layer API constructor', function() {
       should(typeof layerApi.messages.sendTexFromUser).be.eql('function');
 
       should(typeof layerApi.announcements.send).be.eql('function');
+      should(typeof layerApi.announcements.sendDedupe).be.eql('function');
+      
+      should(typeof layerApi.blocklist.get).be.eql('function');
+      should(typeof layerApi.blocklist.block).be.eql('function');
+      should(typeof layerApi.blocklist.unblock).be.eql('function');
     });
   });
 
