@@ -89,6 +89,14 @@
       ]
     }
   },
+  "blocklist": {
+    "ownerid": "thisismyuserid",
+    "userid": "abcd",
+    "success": [
+      {"user_id": "abc1234"},
+      {"user_id": "def5678"}
+    ]
+  },
   "uuid": {
     "normal": "e4fd3974-20fe-11e5-89c5-080725007e28",
     "prefixed": "layer:///apps/staging/e4fd3974-20fe-11e5-89c5-080725007e28",

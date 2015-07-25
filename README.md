@@ -246,6 +246,78 @@ layer.announcements.send(payload, function(err, res) {
 
 Same as send an announcement above but including [de-duplicating](https://developer.layer.com/docs/platform#de-duplicating-requests) UUID value.
 
+## Block list
+
+Layer Platform API allows you to manage a [block list](https://developer.layer.com/docs/platform#managing-user-block-lists) in order to align with your own application level blocking. A block list is maintained for each user, enabling users to manage a list of members they don't want to communicate with.
+
+  - `ownerId` The owner of the block list
+  - `userId` A user that is being blocked from communicating with the `ownerId`
+
+### blocklist.get(ownerId, [callback])
+
+Retrieve an array of all blocked users for the specified owner.
+
+##### Arguments
+
+ - `ownerId` - The owner of the block list
+ - `callback(err, res)` - Callback function returns an error and response objects
+
+##### Examples
+
+```javascript
+layer.blocklist.get(ownerId, function(err, res) {
+  if (err) return console.error(err);
+
+  // block list array
+  var blocklist = res.body;
+});
+```
+
+---------------------------------------
+
+
+### blocklist.block(ownerId, userId, [callback])
+
+Add a new blocked user to the block list for the specified owner.
+
+##### Arguments
+
+ - `ownerId` - The owner of the block list
+ - `userId` - A user that is being blocked by the owner
+ - `callback(err, res)` - *Optional* Callback function returns an error and response objects
+
+##### Examples
+
+```javascript
+layer.blocklist.block(ownerId, userId, function(err, res) {
+  if (err) return console.error(err);
+
+  // user blocked
+});
+```
+
+---------------------------------------
+
+### blocklist.unblock(ownerId, userId, [callback])
+
+Remove a user from the block list for the specified owner.
+
+##### Arguments
+
+ - `ownerId` - The owner of the block list
+ - `userId` - A user that is being blocked by the owner
+ - `callback(err, res)` - *Optional* Callback function returns an error and response objects
+
+##### Examples
+
+```javascript
+layer.blocklist.unblock(ownerId, userId, function(err, res) {
+  if (err) return console.error(err);
+
+  // user unblocked
+});
+```
+
 ## Testing
 
 The unit tests are based on the [mocha](http://visionmedia.github.com/mocha/) module, which may be installed via npm. To run the tests make sure that the npm dependencies are installed by running `npm install` from the project directory.
