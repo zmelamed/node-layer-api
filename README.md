@@ -1,5 +1,6 @@
 # Layer API for node.js
-[![Build Status](http://img.shields.io/travis/layerhq/node-layer-api.svg?style=flat)](https://travis-ci.org/layerhq/node-layer-api)
+[![Build Status](http://img.shields.io/travis/layerhq/node-layer-api.svg)](https://travis-ci.org/layerhq/node-layer-api)
+[![npm version](http://img.shields.io/npm/v/layer-api.svg)](https://npmjs.org/package/layer-api) 
 
 A Node.js library, which provides a wrapper for the [Layer](https://layer.com) Platform API.
 
