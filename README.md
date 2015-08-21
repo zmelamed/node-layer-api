@@ -318,6 +318,19 @@ layer.blocklist.unblock(ownerId, userId, function(err, res) {
 });
 ```
 
+## Promises
+
+All the above functions can be used to return a [promise](https://www.promisejs.org/) by appending the `Async` suffix to the function name e.g.:
+
+```javascript
+conversations.createAsync({participants: ['abcd']}).then(function(res) {
+  // conversation ID
+  var cid = res.body.id;
+}).catch(function(err) {
+  console.error(err);
+});
+```
+
 ## Testing
 
 The unit tests are based on the [mocha](https://github.com/mochajs/mocha) module, which may be installed via npm. To run the tests make sure that the npm dependencies are installed by running `npm install` from the project directory.

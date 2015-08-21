@@ -15,7 +15,7 @@ describe('Conversation operations', function() {
   describe('Creating a conversation with participants', function() {
     nock('https://api.layer.com')
       .post('/apps/' + fixtures.appId + '/conversations')
-      .times(2)
+      .times(3)
       .reply(201, fixtures.conversations.success);
 
     it('should return a conversation object', function(done) {
@@ -27,6 +27,20 @@ describe('Conversation operations', function() {
         res.status.should.be.eql(201);
         res.body.should.have.properties(fixtures.conversations.success);
 
+        done(err);
+      });
+    });
+    it('should return a conversation object - promise', function(done) {
+      var payload = {participants: fixtures.conversations.success.participants};
+      layerAPI.conversations.createAsync(payload).then(function(res) {
+        should.exist(res);
+
+        res.status.should.be.eql(201);
+        res.body.should.have.properties(fixtures.conversations.success);
+
+        done();
+      }).catch(function(err) {
+        should.not.exist(err);
         done(err);
       });
     });
