@@ -21,6 +21,42 @@ describe('Layer API utils', function() {
     });
   });
 
+  describe('Message text payload function type user_id', function() {
+    it('should return payload data', function() {
+      var from = 'abcd';
+      var text = 'Hello, World!';
+      utils.messageText('user_id', from, text).should.be.eql({
+        sender: {
+          user_id: from
+        },
+        parts: [
+          {
+            body: text,
+            mime_type: utils.MIME_TEXT
+          }
+        ]
+      });
+    });
+  });
+
+  describe('Message text payload function type name', function() {
+    it('should return payload data', function() {
+      var from = 'abcd';
+      var text = 'Hello, World!';
+      utils.messageText('name', from, text).should.be.eql({
+        sender: {
+          name: from
+        },
+        parts: [
+          {
+            body: text,
+            mime_type: utils.MIME_TEXT
+          }
+        ]
+      });
+    });
+  });
+
   describe('Passing invalid value to toUUID function', function() {
     it('should return null', function() {
       should(utils.toUUID(fixtures.uuid.invalid1)).be.eql(null);
