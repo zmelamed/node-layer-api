@@ -1,6 +1,6 @@
 # Layer API for node.js
 [![Build Status](http://img.shields.io/travis/layerhq/node-layer-api.svg)](https://travis-ci.org/layerhq/node-layer-api)
-[![npm version](http://img.shields.io/npm/v/layer-api.svg)](https://npmjs.org/package/layer-api) 
+[![npm version](http://img.shields.io/npm/v/layer-api.svg)](https://npmjs.org/package/layer-api)
 
 A Node.js library, which provides a wrapper for the [Layer](https://layer.com) Platform API.
 
@@ -125,9 +125,25 @@ var operations = [
 ];
 layer.conversations.edit(cid, operations, function(err, res) {
   if (err) return console.error(err);
+});
+```
 
-  // conversation data
-  var conversation = res.body;
+---------------------------------------
+
+### conversations.delete(cid, [callback])
+
+[Delete](https://developer.layer.com/docs/platform#delete-a-conversation) an existing Conversation by providing conversation ID.
+
+##### Arguments
+
+ - `cid` - Conversation ID
+ - `callback(err, res)` - *Optional* Callback function returns an error and response objects
+
+##### Examples
+
+```javascript
+layer.conversations.delete(cid, function(err, res) {
+  if (err) return console.error(err);
 });
 ```
 
