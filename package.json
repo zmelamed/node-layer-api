@@ -1,10 +1,10 @@
 {
   "name": "layer-api",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Node.js library, which provides a wrapper for the Layer Platform API",
   "main": "lib/index.js",
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha test/"
+    "test": "mocha test/"
   },
   "keywords": [
     "Layer",

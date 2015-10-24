@@ -92,4 +92,16 @@ describe('Conversation operations', function() {
       });
     });
   });
+
+  describe('Delete a conversation by conversation ID', function() {
+    it('should return a 204', function(done) {
+      layerAPI.conversations.delete(conversationId, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+        should(res.body).be.eql(null);
+
+        done(err);
+      });
+    });
+  });
 });

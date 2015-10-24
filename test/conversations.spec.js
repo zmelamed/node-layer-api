@@ -130,6 +130,23 @@ describe('Conversation operations', function() {
     });
   });
 
+  describe('Delete a conversation by conversation ID', function() {
+    nock('https://api.layer.com')
+      .delete('/apps/' + fixtures.appId + '/conversations/' + fixtures.conversations.uuid)
+      .reply(204);
+
+    it('should return a 204', function(done) {
+      layerAPI.conversations.delete(fixtures.conversations.uuid, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.status.should.be.eql(204);
+
+        done(err);
+      });
+    });
+  });
+
   describe('Editing a conversation by passing invalid operations', function() {
     var operations = 'bla';
 
