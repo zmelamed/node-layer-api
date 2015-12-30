@@ -107,6 +107,29 @@ layer.conversations.get(cid, function(err, res) {
 
 ---------------------------------------
 
+### conversations.getFromUser(uid, [cid], callback)
+
+[Retrieve](https://developer.layer.com/docs/platform#retrieve-a-conversation) an existing Conversation by providing user ID and optional specific conversation ID. Response `body` will result in conversation object representation.
+
+##### Arguments
+
+ - `uid` - User ID
+ - `cid` - *Optional* Conversation ID
+ - `callback(err, res)` - Callback function returns an error and response objects
+
+##### Examples
+
+```javascript
+layer.conversations.getFromUser(uid, cid, function(err, res) {
+  if (err) return console.error(err);
+
+  // conversation data
+  var conversation = res.body;
+});
+```
+
+---------------------------------------
+
 ### conversations.edit(cid, operations, [callback])
 
 [Edit](https://developer.layer.com/docs/platform#edit-a-conversation) an existing Conversation by providing conversation ID and one or more `operations` as described by the [Layer Patch](https://github.com/layerhq/layer-patch) format.

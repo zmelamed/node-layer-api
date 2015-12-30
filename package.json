@@ -1,7 +1,10 @@
 {
   "name": "layer-api",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Node.js library, which provides a wrapper for the Layer Platform API",
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org/"
+  },
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha test/"
@@ -16,11 +19,11 @@
   "license": "Apache-2.0",
   "repository": "layerhq/node-layer-api",
   "devDependencies": {
-    "should": "~7.0.1",
-    "mocha": "~2.2.5",
-    "nock": "~2.7.0"
+    "mocha": "^2.2.5",
+    "nock": "^2.7.0",
+    "should": "^7.0.4"
   },
   "dependencies": {
-    "bluebird": "~2.9.34"
+    "bluebird": "^2.9.34"
   }
 }

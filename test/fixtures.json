@@ -4,6 +4,7 @@
   "appIdFull": "layer:///apps/staging/e4fd3974-20fe-11e5-89c5-080725007e28",
   "conversations": {
     "uuid": "f3cc7b32-3c92-11e4-baad-164230d1df67",
+    "userid": "abcd",
     "success": {
       "id": "layer:///conversations/f3cc7b32-3c92-11e4-baad-164230d1df67",
       "url": "https://api.layer.com/apps/24f43c32-4d95-11e4-b3a2-0fd00000020d/conversations/f3cc7b32-3c92-11e4-baad-164230d1df67",

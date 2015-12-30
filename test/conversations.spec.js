@@ -107,6 +107,42 @@ describe('Conversation operations', function() {
     });
   });
 
+  describe('Retrieving a conversation by user ID', function() {
+    nock('https://api.layer.com')
+      .get('/apps/' + fixtures.appId + '/users/' + fixtures.conversations.userid + '/conversations')
+      .reply(200, fixtures.conversations.success);
+
+    it('should return a conversation object', function(done) {
+      layerAPI.conversations.getFromUser(fixtures.conversations.userid, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.status.should.be.eql(200);
+        res.body.should.have.properties(fixtures.conversations.success);
+
+        done(err);
+      });
+    });
+  });
+
+  describe('Retrieving a conversation by user ID and conversation ID', function() {
+    nock('https://api.layer.com')
+      .get('/apps/' + fixtures.appId + '/users/' + fixtures.conversations.userid + '/conversations/' + fixtures.conversations.uuid)
+      .reply(200, fixtures.conversations.success);
+
+    it('should return a conversation object', function(done) {
+      layerAPI.conversations.getFromUser(fixtures.conversations.userid, fixtures.conversations.uuid, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.status.should.be.eql(200);
+        res.body.should.have.properties(fixtures.conversations.success);
+
+        done(err);
+      });
+    });
+  });
+
   describe('Editing a conversation by conversation ID', function() {
     nock('https://api.layer.com')
       .patch('/apps/' + fixtures.appId + '/conversations/' + fixtures.conversations.uuid)
