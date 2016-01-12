@@ -53,6 +53,8 @@ Layer API constructor is initialized with the following configuration values:
 
  - `version` - API version to use (default: `1.0`)
  - `timeout` - Request timeout in milliseconds (default: `10000` milliseconds)
+ - `agent` - Instance of [https.Agent](https://nodejs.org/api/https.html#https_class_https_agent) to use HTTPS KeepAlive
+ - `agentOptions` - Or use [Agent options](https://nodejs.org/api/http.html#http_new_agent_options) hash directly
  - `debug` - Enable debugging (default: `false`)
 
 ## Conversations
@@ -380,6 +382,10 @@ The unit tests are based on the [mocha](https://github.com/mochajs/mocha) module
 ## Contributing
 
 Layer API is an Open Source project maintained by Layer. Feedback and contributions are always welcome and the maintainers try to process patches as quickly as possible. Feel free to open up a Pull Request or Issue on Github.
+
+## Changelog
+
+For a list of version changes please refer to [Github releases](https://github.com/layerhq/node-layer-api/releases) page.
 
 ## Author
 
