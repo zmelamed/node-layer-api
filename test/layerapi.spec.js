@@ -27,7 +27,7 @@ describe('Layer API constructor', function() {
 
       should(typeof layerApi.announcements.send).be.eql('function');
       should(typeof layerApi.announcements.sendDedupe).be.eql('function');
-      
+
       should(typeof layerApi.blocklist.get).be.eql('function');
       should(typeof layerApi.blocklist.block).be.eql('function');
       should(typeof layerApi.blocklist.unblock).be.eql('function');
@@ -73,6 +73,18 @@ describe('Layer API constructor', function() {
       catch (err) {
         should.exist(err);
         err.message.should.be.eql(utils.i18n.layerapi.appId);
+      }
+    });
+  });
+
+  describe('Passing config with invalid agent', function() {
+    it('should throw an error', function() {
+      try {
+        new LayerAPI({token: fixtures.token, appId: fixtures.appIdFull, agent: 123});
+      }
+      catch (err) {
+        should.exist(err);
+        err.message.should.be.eql(utils.i18n.layerapi.agent);
       }
     });
   });
