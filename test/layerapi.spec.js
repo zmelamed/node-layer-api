@@ -22,8 +22,8 @@ describe('Layer API constructor', function() {
 
       should(typeof layerApi.messages.send).be.eql('function');
       should(typeof layerApi.messages.sendDedupe).be.eql('function');
-      should(typeof layerApi.messages.sendTexFromUser).be.eql('function');
-      should(typeof layerApi.messages.sendTexFromUser).be.eql('function');
+      should(typeof layerApi.messages.sendTextFromUser).be.eql('function');
+      should(typeof layerApi.messages.sendTextFromUser).be.eql('function');
 
       should(typeof layerApi.announcements.send).be.eql('function');
       should(typeof layerApi.announcements.sendDedupe).be.eql('function');

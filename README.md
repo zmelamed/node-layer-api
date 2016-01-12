@@ -32,7 +32,7 @@ layer.conversations.create({participants: ['abcd']}, function(err, res) {
   var cid = res.body.id;
 
   // Send a Message
-  layer.messages.sendTexFromUser(cid, 'abcd', 'Hello, World!', function(err, res) {
+  layer.messages.sendTextFromUser(cid, 'abcd', 'Hello, World!', function(err, res) {
     console.log(err || res.body);
   });
 });
@@ -220,7 +220,7 @@ Same as send a message above but including [de-duplicating](https://developer.la
 
 ---------------------------------------
 
-### messages.sendTexFromUser(cid, userId, text, [callback])
+### messages.sendTextFromUser(cid, userId, text, [callback])
 
 Shorthand method for sending a plain text Message by providing `userId` and `text`.
 
@@ -233,7 +233,7 @@ Shorthand method for sending a plain text Message by providing `userId` and `tex
 
 ---------------------------------------
 
-### messages.sendTexFromName(cid, name, text, [callback])
+### messages.sendTextFromName(cid, name, text, [callback])
 
 Shorthand method for sending a plain text Message by providing `name` and `text`.
 
