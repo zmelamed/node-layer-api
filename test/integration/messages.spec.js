@@ -85,9 +85,9 @@ describe('Messages operations', function() {
     });
   });
 
-  describe('Sending a message to a conversation using sendTexFromName', function() {
+  describe('Sending a message to a conversation using sendTextFromName', function() {
     it('should return an error', function(done) {
-      layerAPI.messages.sendTexFromName(conversationId, message.sender.name, 'hello world', function(err, res) {
+      layerAPI.messages.sendTextFromName(conversationId, message.sender.name, 'hello world', function(err, res) {
         should.not.exist(err);
         should.exist(res);
 
@@ -99,9 +99,9 @@ describe('Messages operations', function() {
     });
   });
 
-  describe('Sending a message to a conversation using sendTexFromUser', function() {
+  describe('Sending a message to a conversation using sendTextFromUser', function() {
     it('should return an error', function(done) {
-      layerAPI.messages.sendTexFromUser(conversationId, participants[0], 'hello world2', function(err, res) {
+      layerAPI.messages.sendTextFromUser(conversationId, participants[0], 'hello world2', function(err, res) {
         should.not.exist(err);
         should.exist(res);
 

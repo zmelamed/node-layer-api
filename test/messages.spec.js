@@ -66,7 +66,7 @@ describe('Messages operations', function() {
     });
   });
 
-  describe('Sending a message to a conversation using sendTexFromUser', function() {
+  describe('Sending a message to a conversation using sendTextFromUser', function() {
     nock('https://api.layer.com')
       .post('/apps/' + fixtures.appId + '/conversations/' + fixtures.conversations.uuid + '/messages')
       .reply(201, fixtures.messages.success);
@@ -74,7 +74,7 @@ describe('Messages operations', function() {
     it('should return a message object', function(done) {
       var userId = 'abcd';
       var text = 'testing 123';
-      layerAPI.messages.sendTexFromUser(fixtures.conversations.uuid, userId, text, function(err, res) {
+      layerAPI.messages.sendTextFromUser(fixtures.conversations.uuid, userId, text, function(err, res) {
         should.not.exist(err);
         should.exist(res);
 
@@ -86,7 +86,7 @@ describe('Messages operations', function() {
     });
   });
 
-  describe('Sending a message to a conversation using sendTexFromName', function() {
+  describe('Sending a message to a conversation using sendTextFromName', function() {
     nock('https://api.layer.com')
       .post('/apps/' + fixtures.appId + '/conversations/' + fixtures.conversations.uuid + '/messages')
       .reply(201, fixtures.messages.success);
@@ -94,7 +94,7 @@ describe('Messages operations', function() {
     it('should return a message object', function(done) {
       var name = 'The System';
       var text = 'testing 123';
-      layerAPI.messages.sendTexFromName(fixtures.conversations.uuid, name, text, function(err, res) {
+      layerAPI.messages.sendTextFromName(fixtures.conversations.uuid, name, text, function(err, res) {
         should.not.exist(err);
         should.exist(res);
 

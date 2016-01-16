@@ -1,6 +1,6 @@
 {
   "name": "layer-api",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "Node.js library, which provides a wrapper for the Layer Platform API",
   "publishConfig": {
     "registry": "http://registry.npmjs.org/"
