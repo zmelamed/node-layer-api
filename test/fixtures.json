@@ -37,6 +37,8 @@
     }
   },
   "messages": {
+    "id": "layer:///messages/940de862-3c96-11e4-baad-164230d1df67",
+    "uuid": "940de862-3c96-11e4-baad-164230d1df67",
     "success": {
       "id": "layer:///messages/940de862-3c96-11e4-baad-164230d1df67",
       "url": "https://api.layer.com/apps/24f43c32-4d95-11e4-b3a2-0fd00000020d/messages/940de862-3c96-11e4-baad-164230d1df67",

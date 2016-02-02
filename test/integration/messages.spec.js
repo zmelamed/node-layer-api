@@ -9,7 +9,8 @@ var layerAPI = new LayerAPI({token: process.env.LAYER_TOKEN, appId: process.env.
 describe('Messages operations', function() {
 
   var participants = ['test123'],
-      conversationId = null;
+      conversationId = null,
+      messageId = null;
 
   var message = {
     sender: {
@@ -86,8 +87,23 @@ describe('Messages operations', function() {
   });
 
   describe('Sending a message to a conversation using sendTextFromName', function() {
-    it('should return an error', function(done) {
+    it('should return a message object', function(done) {
       layerAPI.messages.sendTextFromName(conversationId, message.sender.name, 'hello world', function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.status.should.be.eql(201);
+        res.body.should.have.properties(['conversation', 'id', 'parts', 'sender']);
+        messageId = res.body.id;
+
+        done();
+      });
+    });
+  });
+
+  describe('Sending a message to a conversation using sendTextFromUser', function() {
+    it('should return a message object', function(done) {
+      layerAPI.messages.sendTextFromUser(conversationId, participants[0], 'hello world2', function(err, res) {
         should.not.exist(err);
         should.exist(res);
 
@@ -99,14 +115,42 @@ describe('Messages operations', function() {
     });
   });
 
-  describe('Sending a message to a conversation using sendTextFromUser', function() {
-    it('should return an error', function(done) {
-      layerAPI.messages.sendTextFromUser(conversationId, participants[0], 'hello world2', function(err, res) {
+  describe('Retrieving messages in a conversation', function() {
+    it('should return array of messages', function(done) {
+      layerAPI.messages.getAll(conversationId, function(err, res) {
         should.not.exist(err);
         should.exist(res);
 
-        res.status.should.be.eql(201);
-        res.body.should.have.properties(['conversation', 'id', 'parts', 'sender']);
+        res.status.should.be.eql(200);
+        res.body.length.should.be.eql(3);
+
+        done();
+      });
+    });
+  });
+
+  describe('Retrieving all messages in a conversation from a user', function() {
+    it('should return array of messages', function(done) {
+      layerAPI.messages.getAllFromUser(participants[0], conversationId, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.status.should.be.eql(200);
+        res.body.length.should.be.eql(3);
+
+        done();
+      });
+    });
+  });
+
+  describe('Retrieving a messages in a conversation from a user', function() {
+    it('should return array of messages', function(done) {
+      layerAPI.messages.getFromUser(participants[0], messageId, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.status.should.be.eql(200);
+        res.body.id.should.be.eql(messageId);
 
         done();
       });
