@@ -244,6 +244,45 @@ Shorthand method for sending a plain text Message by providing `name` and `text`
  - `text` - Text or base64 encoded data for your message
  - `callback(err, res)` - *Optional* Callback function returns an error and response objects
 
+### messages.getAll(cid, [callback])
+
+[Retrieve](https://developer.layer.com/docs/platform#retrieving-messages) all messages in a conversation by providing `cid`. Response `body` will result in array of messages.
+
+##### Arguments
+
+- `cid` - Conversation ID
+- `callback(err, res)` - Callback function returns an error and response objects
+
+##### Examples
+
+```javascript
+layer.messages.getAll(cid, function(err, res) {
+  if (err) return console.error(err);
+
+  var messages = res.body;
+});
+```
+
+### messages.getAllFromUser(userId, cid, [callback])
+
+Retrieve all messages in a conversation from a specific user by providing `userId` and `cid`. Response `body` will result in array of messages.
+
+##### Arguments
+
+- `userId` - User ID
+- `cid` - Conversation ID
+- `callback(err, res)` - Callback function returns an error and response objects
+
+### messages.getFromUser(userId, messageId, [callback])
+
+Retrieve a single message in a conversation from a specific user by providing `userId` and `messageId`. Response `body` will result in a single message representation.
+
+##### Arguments
+
+- `userId` - User ID
+- `messageId` - Message ID
+- `callback(err, res)` - Callback function returns an error and response objects
+
 ## Announcements
 
 Announcements are messages sent to all users of the application or to a list of users.
