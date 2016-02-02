@@ -133,4 +133,55 @@ describe('Messages operations', function() {
       });
     });
   });
+
+  describe('Retrieving all messages in a conversation from a user', function() {
+    nock('https://api.layer.com')
+      .get('/apps/' + fixtures.appId + '/users/12345/conversations/' + fixtures.conversations.uuid + '/messages')
+      .reply(200, [fixtures.messages.success]);
+
+    it('should return array of messages', function(done) {
+      layerAPI.messages.getAllFromUser(12345, fixtures.conversations.uuid, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.body.length.should.be.eql(1);
+
+        done();
+      });
+    });
+  });
+
+  describe('Retrieving messages in a conversation', function() {
+    nock('https://api.layer.com')
+      .get('/apps/' + fixtures.appId + '/conversations/' + fixtures.conversations.uuid + '/messages')
+      .reply(200, [fixtures.messages.success]);
+
+    it('should return array of messages', function(done) {
+      layerAPI.messages.getAll(fixtures.conversations.uuid, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.body.length.should.be.eql(1);
+
+        done();
+      });
+    });
+  });
+
+  describe('Retrieving a messages in a conversation from a user', function() {
+    nock('https://api.layer.com')
+      .get('/apps/' + fixtures.appId + '/users/12345/messages/' + fixtures.messages.uuid)
+      .reply(200, fixtures.messages.success);
+
+    it('should return array of messages', function(done) {
+      layerAPI.messages.getFromUser(12345, fixtures.messages.id, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.body.id.should.be.eql(fixtures.messages.id);
+
+        done();
+      });
+    });
+  });
 });
