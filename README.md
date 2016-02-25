@@ -109,20 +109,48 @@ layer.conversations.get(cid, function(err, res) {
 
 ---------------------------------------
 
-### conversations.getFromUser(uid, [cid], callback)
+### conversations.getFromUser(uid, cid, callback)
 
-[Retrieve](https://developer.layer.com/docs/platform#retrieve-a-conversation) an existing Conversation by providing user ID and optional specific conversation ID. Response `body` will result in conversation object representation.
+[Retrieve](https://developer.layer.com/docs/platform#retrieve-a-conversation) an existing Conversation by providing user ID and conversation ID. Response `body` will result in conversation object representation.
 
 ##### Arguments
 
  - `uid` - User ID
- - `cid` - *Optional* Conversation ID
+ - `cid` - Conversation ID
  - `callback(err, res)` - Callback function returns an error and response objects
 
 ##### Examples
 
 ```javascript
 layer.conversations.getFromUser(uid, cid, function(err, res) {
+  if (err) return console.error(err);
+
+  // conversation data
+  var conversation = res.body;
+});
+```
+
+---------------------------------------
+
+### conversations.getAllFromUser(uid, [params], callback)
+
+[Retrieve](https://developer.layer.com/docs/platform#retrieve-a-conversation) all Conversations by providing user ID. Response `body` will result in an array of conversation objects.
+
+##### Arguments
+
+ - `uid` - User ID
+ - `params` - *Optional* Query parameters can contain `page_size`, `from_id` and `sort_by`
+ - `callback(err, res)` - Callback function returns an error and response objects
+
+##### Examples
+
+```javascript
+var params = {
+  page_size: 50,
+  from_id: cid,
+  sort_by: 'last_message' // `created_at` or `last_message`
+};
+layer.conversations.getAllFromUser(uid, params, function(err, res) {
   if (err) return console.error(err);
 
   // conversation data
@@ -146,7 +174,7 @@ layer.conversations.getFromUser(uid, cid, function(err, res) {
 
 ```javascript
 var operations = [
-  {"operation": "add", "property": "participants", "value": "user1"}
+  {operation: 'add', property: 'participants', value: 'user1'}
 ];
 layer.conversations.edit(cid, operations, function(err, res) {
   if (err) return console.error(err);
@@ -244,26 +272,32 @@ Shorthand method for sending a plain text Message by providing `name` and `text`
  - `text` - Text or base64 encoded data for your message
  - `callback(err, res)` - *Optional* Callback function returns an error and response objects
 
-### messages.getAll(cid, [callback])
+### messages.getAll(cid, [params], callback)
 
 [Retrieve](https://developer.layer.com/docs/platform#retrieving-messages) all messages in a conversation by providing `cid`. Response `body` will result in array of messages.
 
 ##### Arguments
 
 - `cid` - Conversation ID
+- `params` - *Optional* Query parameters can contain `page_size`, `from_id` and `sort_by`
 - `callback(err, res)` - Callback function returns an error and response objects
 
 ##### Examples
 
 ```javascript
-layer.messages.getAll(cid, function(err, res) {
+var params = {
+  page_size: 50,
+  from_id: messageId,
+  sort_by: 'last_message' // `created_at` or `last_message`
+};
+layer.messages.getAll(cid, params, function(err, res) {
   if (err) return console.error(err);
 
   var messages = res.body;
 });
 ```
 
-### messages.getAllFromUser(userId, cid, [callback])
+### messages.getAllFromUser(userId, cid, [params], callback)
 
 Retrieve all messages in a conversation from a specific user by providing `userId` and `cid`. Response `body` will result in array of messages.
 
@@ -271,6 +305,7 @@ Retrieve all messages in a conversation from a specific user by providing `userI
 
 - `userId` - User ID
 - `cid` - Conversation ID
+- `params` - *Optional* Query parameters can contain `page_size`, `from_id` and `sort_by`
 - `callback(err, res)` - Callback function returns an error and response objects
 
 ### messages.getFromUser(userId, messageId, [callback])

@@ -20,8 +20,8 @@
   "repository": "layerhq/node-layer-api",
   "devDependencies": {
     "mocha": "^2.4.5",
-    "nock": "^2.18.2",
-    "should": "^7.1.1"
+    "nock": "^7.2.2",
+    "should": "^8.2.2"
   },
   "dependencies": {
     "bluebird": "^2.10.2"

@@ -151,6 +151,33 @@ describe('Messages operations', function() {
     });
   });
 
+  describe('Retrieving all messages in a conversation from a user with query parameters', function() {
+    nock('https://api.layer.com')
+      .get('/apps/' + fixtures.appId + '/users/12345/conversations/' + fixtures.conversations.uuid + '/messages')
+      .query({
+        page_size: 50,
+        from_id: fixtures.conversations.uuid,
+        sort_by: 'last_message'
+      })
+      .reply(200, [fixtures.messages.success]);
+
+    it('should return array of messages', function(done) {
+      var params = {
+        page_size: 50,
+        from_id: fixtures.conversations.uuid,
+        sort_by: 'last_message'
+      };
+      layerAPI.messages.getAllFromUser(12345, fixtures.conversations.uuid, params, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.body.length.should.be.eql(1);
+
+        done();
+      });
+    });
+  });
+
   describe('Retrieving messages in a conversation', function() {
     nock('https://api.layer.com')
       .get('/apps/' + fixtures.appId + '/conversations/' + fixtures.conversations.uuid + '/messages')
@@ -158,6 +185,33 @@ describe('Messages operations', function() {
 
     it('should return array of messages', function(done) {
       layerAPI.messages.getAll(fixtures.conversations.uuid, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.body.length.should.be.eql(1);
+
+        done();
+      });
+    });
+  });
+
+  describe('Retrieving messages in a conversation with query parameters', function() {
+    nock('https://api.layer.com')
+      .get('/apps/' + fixtures.appId + '/conversations/' + fixtures.conversations.uuid + '/messages')
+      .query({
+        page_size: 50,
+        from_id: fixtures.conversations.uuid,
+        sort_by: 'last_message'
+      })
+      .reply(200, [fixtures.messages.success]);
+
+    it('should return array of messages', function(done) {
+      var params = {
+        page_size: 50,
+        from_id: fixtures.conversations.uuid,
+        sort_by: 'last_message'
+      };
+      layerAPI.messages.getAll(fixtures.conversations.uuid, params, function(err, res) {
         should.not.exist(err);
         should.exist(res);
 

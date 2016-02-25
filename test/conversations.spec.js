@@ -107,13 +107,13 @@ describe('Conversation operations', function() {
     });
   });
 
-  describe('Retrieving a conversation by user ID', function() {
+  describe('Retrieving a conversation by user ID and conversation ID', function() {
     nock('https://api.layer.com')
-      .get('/apps/' + fixtures.appId + '/users/' + fixtures.conversations.userid + '/conversations')
+      .get('/apps/' + fixtures.appId + '/users/' + fixtures.conversations.userid + '/conversations/' + fixtures.conversations.uuid)
       .reply(200, fixtures.conversations.success);
 
     it('should return a conversation object', function(done) {
-      layerAPI.conversations.getFromUser(fixtures.conversations.userid, function(err, res) {
+      layerAPI.conversations.getFromUser(fixtures.conversations.userid, fixtures.conversations.uuid, function(err, res) {
         should.not.exist(err);
         should.exist(res);
 
@@ -125,13 +125,41 @@ describe('Conversation operations', function() {
     });
   });
 
-  describe('Retrieving a conversation by user ID and conversation ID', function() {
+  describe('Retrieving all conversations by user ID', function() {
     nock('https://api.layer.com')
-      .get('/apps/' + fixtures.appId + '/users/' + fixtures.conversations.userid + '/conversations/' + fixtures.conversations.uuid)
+      .get('/apps/' + fixtures.appId + '/users/' + fixtures.conversations.userid + '/conversations')
       .reply(200, fixtures.conversations.success);
 
     it('should return a conversation object', function(done) {
-      layerAPI.conversations.getFromUser(fixtures.conversations.userid, fixtures.conversations.uuid, function(err, res) {
+      layerAPI.conversations.getAllFromUser(fixtures.conversations.userid, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.status.should.be.eql(200);
+        res.body.should.have.properties(fixtures.conversations.success);
+
+        done(err);
+      });
+    });
+  });
+
+  describe('Retrieving all conversations by user ID with query parameters', function() {
+    nock('https://api.layer.com')
+      .get('/apps/' + fixtures.appId + '/users/' + fixtures.conversations.userid + '/conversations')
+      .query({
+        page_size: 50,
+        from_id: fixtures.conversations.uuid,
+        sort_by: 'last_message'
+      })
+      .reply(200, fixtures.conversations.success);
+
+    it('should return a conversation object', function(done) {
+      var params = {
+        page_size: 50,
+        from_id: fixtures.conversations.uuid,
+        sort_by: 'last_message'
+      };
+      layerAPI.conversations.getAllFromUser(fixtures.conversations.userid, params, function(err, res) {
         should.not.exist(err);
         should.exist(res);
 
