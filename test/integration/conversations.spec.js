@@ -86,7 +86,95 @@ describe('Conversation operations', function() {
       layerAPI.conversations.edit(conversationId, operations, function(err, res) {
         should.not.exist(err);
         should.exist(res);
-        should(res.body).be.eql(null);
+        should(res.status).be.eql(204);
+        should(res.body).be.eql('');
+
+        done(err);
+      });
+    });
+  });
+
+  describe('Set metadata properties on a conversation', function() {
+    var properties = {
+      foo: 'bar',
+      number: 123
+    };
+
+    it('should return a 204', function(done) {
+      layerAPI.conversations.setMetadataProperties(conversationId, properties, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+        should(res.status).be.eql(204);
+        should(res.body).be.eql('');
+
+        done(err);
+      });
+    });
+  });
+
+  describe('Delete metadata properties on a conversation', function() {
+    var properties = {
+      foo: 'bar'
+    };
+
+    it('should return a 204', function(done) {
+      layerAPI.conversations.deleteMetadataProperties(conversationId, properties, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+        should(res.status).be.eql(204);
+        should(res.body).be.eql('');
+
+        done(err);
+      });
+    });
+  });
+
+  describe('Add participants to a conversation', function() {
+    var participants = [
+      'userFoo',
+      'userBar'
+    ];
+
+    it('should return a 204', function(done) {
+      layerAPI.conversations.addParticipants(conversationId, participants, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+        should(res.status).be.eql(204);
+        should(res.body).be.eql('');
+
+        done(err);
+      });
+    });
+  });
+
+  describe('Remove participants to a conversation', function() {
+    var participants = [
+      'userFoo'
+    ];
+
+    it('should return a 204', function(done) {
+      layerAPI.conversations.removeParticipants(conversationId, participants, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+        should(res.status).be.eql(204);
+        should(res.body).be.eql('');
+
+        done(err);
+      });
+    });
+  });
+
+  describe('Replace participants to a conversation', function() {
+    var participants = [
+      'userAdmin'
+    ];
+
+    it('should return a 204', function(done) {
+      layerAPI.conversations.replaceParticipants(conversationId, participants, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+        should(res.status).be.eql(204);
+        should(res.body).be.eql('');
 
         done(err);
       });
@@ -98,7 +186,8 @@ describe('Conversation operations', function() {
       layerAPI.conversations.delete(conversationId, function(err, res) {
         should.not.exist(err);
         should.exist(res);
-        should(res.body).be.eql(null);
+        should(res.status).be.eql(204);
+        should(res.body).be.eql('');
 
         done(err);
       });

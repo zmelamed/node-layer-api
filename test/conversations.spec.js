@@ -194,6 +194,116 @@ describe('Conversation operations', function() {
     });
   });
 
+  describe('Set metadata properties on a conversation', function() {
+    nock('https://api.layer.com')
+      .patch('/apps/' + fixtures.appId + '/conversations/' + fixtures.conversations.uuid)
+      .reply(204);
+
+    var properties = {
+      foo: 'bar',
+      number: 123
+    };
+
+    it('should return a 204', function(done) {
+      layerAPI.conversations.setMetadataProperties(fixtures.conversations.uuid, properties, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.status.should.be.eql(204);
+
+        done(err);
+      });
+    });
+  });
+
+  describe('Delete metadata properties on a conversation', function() {
+    nock('https://api.layer.com')
+      .patch('/apps/' + fixtures.appId + '/conversations/' + fixtures.conversations.uuid)
+      .reply(204);
+
+    var properties = {
+      foo: 'bar',
+      number: 123
+    };
+
+    it('should return a 204', function(done) {
+      layerAPI.conversations.deleteMetadataProperties(fixtures.conversations.uuid, properties, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.status.should.be.eql(204);
+
+        done(err);
+      });
+    });
+  });
+
+  describe('Add participants on a conversation', function() {
+    nock('https://api.layer.com')
+      .patch('/apps/' + fixtures.appId + '/conversations/' + fixtures.conversations.uuid)
+      .reply(204);
+
+    var participants = [
+      'foo',
+      'bar'
+    ];
+
+    it('should return a 204', function(done) {
+      layerAPI.conversations.addParticipants(fixtures.conversations.uuid, participants, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.status.should.be.eql(204);
+
+        done(err);
+      });
+    });
+  });
+
+  describe('Remove participants on a conversation', function() {
+    nock('https://api.layer.com')
+      .patch('/apps/' + fixtures.appId + '/conversations/' + fixtures.conversations.uuid)
+      .reply(204);
+
+    var participants = [
+      'foo',
+      'bar'
+    ];
+
+    it('should return a 204', function(done) {
+      layerAPI.conversations.removeParticipants(fixtures.conversations.uuid, participants, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.status.should.be.eql(204);
+
+        done(err);
+      });
+    });
+  });
+
+  describe('Replace participants on a conversation', function() {
+    nock('https://api.layer.com')
+      .patch('/apps/' + fixtures.appId + '/conversations/' + fixtures.conversations.uuid)
+      .reply(204);
+
+    var participants = [
+      'foo',
+      'bar'
+    ];
+
+    it('should return a 204', function(done) {
+      layerAPI.conversations.replaceParticipants(fixtures.conversations.uuid, participants, function(err, res) {
+        should.not.exist(err);
+        should.exist(res);
+
+        res.status.should.be.eql(204);
+
+        done(err);
+      });
+    });
+  });
+
   describe('Delete a conversation by conversation ID', function() {
     nock('https://api.layer.com')
       .delete('/apps/' + fixtures.appId + '/conversations/' + fixtures.conversations.uuid)

@@ -160,6 +160,41 @@ layer.conversations.getAllFromUser(uid, params, function(err, res) {
 
 ---------------------------------------
 
+### conversations.setMetadataProperties(cid, properties, [callback])
+
+[Set metadata](https://developer.layer.com/docs/platform#set-amp-delete-metadata) on an existing Conversation by providing conversation ID and `properties` object.
+
+##### Arguments
+
+ - `cid` - Conversation ID
+ - `properties` - Metadata properties object
+ - `callback(err, res)` - *Optional* Callback function returns an error and response objects
+
+##### Examples
+
+```javascript
+var properties = {
+  foo: 'bar'
+};
+layer.conversations.setMetadataProperties(cid, properties, function(err, res) {
+  if (err) return console.error(err);
+});
+```
+
+---------------------------------------
+
+### conversations.deleteMetadataProperties(cid, properties, [callback])
+
+[Delete metadata]((https://developer.layer.com/docs/platform#set-amp-delete-metadata) on an existing Conversation by providing conversation ID and `properties` object.
+
+##### Arguments
+
+ - `cid` - Conversation ID
+ - `properties` - Properties object
+ - `callback(err, res)` - *Optional* Callback function returns an error and response objects
+
+---------------------------------------
+
 ### conversations.edit(cid, operations, [callback])
 
 [Edit](https://developer.layer.com/docs/platform#edit-a-conversation) an existing Conversation by providing conversation ID and one or more `operations` as described by the [Layer Patch](https://github.com/layerhq/layer-patch) format.
@@ -167,19 +202,53 @@ layer.conversations.getAllFromUser(uid, params, function(err, res) {
 ##### Arguments
 
  - `cid` - Conversation ID
- - `operations` - Conversation operations array
+ - `operations` - Layer Patch operations array
+ - `callback(err, res)` - *Optional* Callback function returns an error and response objects
+
+---------------------------------------
+
+### conversations.addParticipants(cid, participants, [callback])
+
+[Add participants](https://developer.layer.com/docs/platform#editing-conversations) to an existing Conversation by providing conversation ID and array of `participants`.
+
+##### Arguments
+
+ - `cid` - Conversation ID
+ - `participants` - Array of participants
  - `callback(err, res)` - *Optional* Callback function returns an error and response objects
 
 ##### Examples
 
 ```javascript
-var operations = [
-  {operation: 'add', property: 'participants', value: 'user1'}
-];
-layer.conversations.edit(cid, operations, function(err, res) {
+var participants = ['user1'];
+layer.conversations.addParticipants(cid, participants, function(err, res) {
   if (err) return console.error(err);
 });
 ```
+
+---------------------------------------
+
+### conversations.removeParticipants(cid, participants, [callback])
+
+[Remove participants](https://developer.layer.com/docs/platform#editing-conversations) of an existing Conversation by providing conversation ID and array of `participants`.
+
+##### Arguments
+
+ - `cid` - Conversation ID
+ - `participants` - Array of participants
+ - `callback(err, res)` - *Optional* Callback function returns an error and response objects
+
+---------------------------------------
+
+### conversations.replaceParticipants(cid, participants, [callback])
+
+[Replace all participants](https://developer.layer.com/docs/platform#editing-conversations) of an existing Conversation by providing conversation ID and array of `participants`.
+
+##### Arguments
+
+- `cid` - Conversation ID
+- `participants` - Array of participants
+- `callback(err, res)` - *Optional* Callback function returns an error and response objects
 
 ---------------------------------------
 
