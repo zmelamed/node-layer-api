@@ -106,5 +106,18 @@
     "invalid1": "sgfaljshdfkluasfkua",
     "invalid2": 123,
     "invalid3": null
+  },
+  "identities": {
+    "id": "abc",
+    "success": {
+      "display_name": "abcd",
+      "first_name": "ab",
+      "last_name": "cd",
+      "phone_number": "1234567890",
+      "email_address": "ab@cd.com",
+      "metadata": {
+        "hey": "ho"
+      }
+    }
   }
 }

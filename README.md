@@ -503,6 +503,143 @@ layer.blocklist.unblock(ownerId, userId, function(err, res) {
 });
 ```
 
+---------------------------------------
+
+## Identities
+
+Layer Platform API allows you to manage  [Identities](https://developer.layer.com/docs/platform/misc#identity) in order to associate data about your users with the user.  Helpful for quickly rendering information about a user when showing a Message from them.
+
+An Identity consists of the following properties:
+
+  - `display_name`: **Required** Display name
+  - `avatar_url`: *Optional* Avatar URL
+  - `first_name`: *Optional* First name
+  - `last_name`: *Optional* Last name
+  - `phone_number`: *Optional* Phone number
+  - `email_address`: *Optional* Email address
+  - `public_key`: *Optional* Encryption key
+  - `metadata`: *Optional* Hash of custom keys
+
+### identities.create(userId, properties, [callback])
+
+Creates an Identity on the Identities server.
+
+
+##### Arguments
+
+ - `userId` - User ID of the user we are creating
+ - `properties` - Properties of the user to be created. (`display_name` is a required property)
+ - `callback(err)` - *Optional* Callback function returns an error or status 201
+
+##### Examples
+
+```javascript
+layer.identities.create('frodo', {
+  display_name: 'Frodo the Dodo',
+  first_name: 'Frodo',
+  last_name: 'Baggins'
+}, function(err, res) {
+  if (err) return console.error(err);
+
+  // Identity created
+});
+```
+
+---------------------------------------
+
+### identities.get(userId, callback)
+
+Retrieves an Identity from the Identities server.
+
+##### Arguments
+
+ - `userId` - User ID of the user we are updating
+ - `callback(err)` - Callback function returns an error or identity object
+
+##### Examples
+
+```javascript
+layer.identities.get('frodo', function(err, res) {
+  if (err) return console.error(err);
+
+  // Identity retrieved:
+  console.log('User: ' + res.body.display_name);
+});
+```
+
+---------------------------------------
+
+### identities.edit(userId, properties, [callback])
+
+Updates an Identity on the Identities server.
+
+##### Arguments
+
+ - `userId` - User ID of the user we are updating
+ - `properties` - Properties of the user that should be updated.
+ - `callback(err)` - *Optional* Callback function returns an error or status 204
+
+##### Examples
+
+```javascript
+layer.identities.edit('frodo', {
+  first_name: 'Frodo 2'
+}, function(err, res) {
+  if (err) return console.error(err);
+
+  // Identity updated
+});
+```
+
+---------------------------------------
+
+### identities.replace(userId, properties, [callback])
+
+Replace all properties on Identity.
+
+##### Arguments
+
+ - `userId` - User ID of the user we are updating
+ - `properties` - Properties of the user that should be updated. (`display_name` is a required property)
+ - `callback(err)` - *Optional* Callback function returns an error or status 204
+
+##### Examples
+
+```javascript
+layer.identities.replace('frodo', {
+  display_name: 'Frodo the Dodo 3',
+  first_name: 'Frodo 3'
+}, function(err, res) {
+  if (err) return console.error(err);
+
+  // Identity updated
+});
+```
+
+---------------------------------------
+
+### identities.delete(userId, [callback])
+
+Deletes an Identity from the Identities server.
+
+
+##### Arguments
+
+ - `userId` - User ID of the user we are deleting
+ - `callback(err)` - *Optional* Callback function returns an error or status 204
+
+##### Examples
+
+```javascript
+layer.identities.delete("frodo", function(err, res) {
+  if (err) return console.error(err);
+
+  // Identity deleted
+});
+```
+
+---------------------------------------
+
 ## Promises
 
 All the above functions can be used to return a [promise](https://www.promisejs.org/) by appending the `Async` suffix to the function name e.g.:
