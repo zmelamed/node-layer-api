@@ -31,6 +31,11 @@ describe('Layer API constructor', function() {
       should(typeof layerApi.blocklist.get).be.eql('function');
       should(typeof layerApi.blocklist.block).be.eql('function');
       should(typeof layerApi.blocklist.unblock).be.eql('function');
+
+      should(typeof layerApi.identities.get).be.eql('function');
+      should(typeof layerApi.identities.edit).be.eql('function');
+      should(typeof layerApi.identities.create).be.eql('function');
+      should(typeof layerApi.identities.delete).be.eql('function');
     });
   });
 
