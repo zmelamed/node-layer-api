@@ -389,9 +389,7 @@ Retrieve a single message in a conversation from a specific user by providing `u
 
 ## Announcements
 
-Announcements are messages sent to all users of the application or to a list of users.
-
-Payload property `recipients` can contain one or more user IDs or the literal string "everyone" in order to message the entire userbase.
+Announcements are messages sent to all users of the application or to a list of users. Recipients should be specified in the `recipients` property, which takes an array of user IDs.
 
 ### announcements.send(payload, [callback])
 
